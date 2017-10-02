@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.1",
+    "pg-promise": "^6.10.2",
     "pug": "^2.0.0-rc.4"
   }
 }
