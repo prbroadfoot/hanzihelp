@@ -9,6 +9,7 @@
   "author": "Paul Broadfoot",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.1"
+    "express": "^4.16.1",
+    "pug": "^2.0.0-rc.4"
   }
 }
