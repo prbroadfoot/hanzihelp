@@ -1,17 +1,24 @@
 -- keyword: string
 -- frame_type: 'character' or 'primitive'
--- Returns character data for row matching keyword, if it exists.
--- Keyword may match either 'keyword' column or alternative readings.
--- If multiple rows match a given keyword, only returns the row that matches frame_type.
--- If only one row matches a given keyword, frame_type does not necessarily match.
+-- Returns character data for the best matching row by keyword, if a match exists
+-- Provided keyword may match 'keyword' column or alternative reading.
+-- Prioritizes rows that match frame_type
+-- Then prioritizes rows that match 'keyword' column (rather than alternative reading)
 SELECT number, character, keyword, strokes, lesson, book, frame_type FROM
 (
-SELECT number, character, keyword, strokes, lesson, book, frames.frame_type,
-       (CASE WHEN frames.frame_type = $(frame_type) THEN 0 ELSE 1 END) AS ordr
+SELECT number, character, keyword, strokes, lesson, book, frame_type,
+       (CASE WHEN frame_type = $(frame_type) THEN 0 ELSE 2 END) AS ordr
 FROM frames
-LEFT JOIN alternative_readings
+WHERE upper(keyword) = upper($(keyword))
+
+UNION
+
+SELECT number, character, keyword, strokes, lesson, book, frames.frame_type,
+       (CASE WHEN frames.frame_type = $(frame_type) THEN 1 ELSE 3 END) AS ordr
+FROM alternative_readings
+INNER JOIN frames
 ON alternative_readings.frame_number = frames.number AND alternative_readings.frame_type = frames.frame_type
-WHERE upper(frames.keyword) = upper($(keyword)) OR upper(alternative_readings.reading) = upper($(keyword))
+WHERE upper(alternative_readings.reading) = upper($(keyword))
 ORDER BY ordr
 LIMIT 1
 ) AS matching_frame
