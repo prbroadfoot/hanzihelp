@@ -30,6 +30,15 @@ exports.getAlternativeReadings = ({ frame_number, frame_type }) => {
     .then(readings => readings.map(reading => reading.reading));
 };
 
+exports.getCharactersThatCiteFrame = ({ frame_number, frame_type }) => {
+  return db
+    .any(sql.getCharactersThatCiteFrame, {
+      frame_number: frame_number,
+      frame_type: frame_type
+    })
+    .then(characters => characters.map(character => character.character));
+};
+
 exports.getElements = ({ frame_number, frame_type }) => {
   return db.any(sql.getElements, {
     frame_number: frame_number,

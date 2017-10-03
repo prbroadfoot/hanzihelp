@@ -107,6 +107,17 @@ describe('getAlternativeReadings', () => {
   });
 });
 
+describe('getCharactersThatCiteFrame', () => {
+  test('finds characters that cite a character frame', () => {
+    return expect(
+      Frame.getCharactersThatCiteFrame({
+        frame_number: 672,
+        frame_type: 'character'
+      })
+    ).resolves.toEqual(['治', '始', '胎', '怠', '怡', '冶', '抬']);
+  });
+});
+
 describe('getElements', () => {
   test('finds the elements for a character frame', () => {
     return expect(
