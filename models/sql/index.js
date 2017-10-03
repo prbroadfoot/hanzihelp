@@ -8,6 +8,7 @@ function sql(file) {
 
 module.exports = {
   frames: {
-    findByKeyword: sql('frames/findByKeyword.sql')
+    findByKeyword: sql('frames/findByKeyword.sql'),
+    findByCharacter: sql('frames/findByCharacter.sql')
   }
 };

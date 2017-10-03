@@ -7,3 +7,9 @@ exports.findByKeyword = (keyword, frame_type = 'character') => {
     frame_type: frame_type
   });
 };
+
+exports.findByCharacter = character => {
+  return db.one(sql.findByCharacter, {
+    character: character
+  });
+};

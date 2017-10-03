@@ -60,3 +60,13 @@ describe('findByKeyword', () => {
     );
   });
 });
+
+describe('findByCharacter', () => {
+  test('finds by character', () => {
+    expect.assertions(1);
+    return expect(Frame.findByCharacter('好')).resolves.toHaveProperty(
+      'keyword',
+      'good'
+    );
+  });
+});
