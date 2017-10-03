@@ -21,6 +21,15 @@ exports.findByLesson = ({ book, lesson }) => {
   });
 };
 
+exports.getAlternativeReadings = ({ frame_number, frame_type }) => {
+  return db
+    .any(sql.getAlternativeReadings, {
+      frame_number: frame_number,
+      frame_type: frame_type
+    })
+    .then(readings => readings.map(reading => reading.reading));
+};
+
 exports.getElements = ({ frame_number, frame_type }) => {
   return db.any(sql.getElements, {
     frame_number: frame_number,

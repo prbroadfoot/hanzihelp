@@ -94,6 +94,19 @@ describe('findByLesson', () => {
   });
 });
 
+describe('getAlternativeReadings', () => {
+  test('finds the alternative readings for a character frame', () => {
+    return expect(
+      Frame.getAlternativeReadings({ frame_number: 1, frame_type: 'character' })
+    ).resolves.toEqual(['floor', 'ceiling']);
+  });
+  test('finds the alternative readings for a primitive frame', () => {
+    return expect(
+      Frame.getAlternativeReadings({ frame_number: 1, frame_type: 'primitive' })
+    ).resolves.toEqual(['eyedropper']);
+  });
+});
+
 describe('getElements', () => {
   test('finds the elements for a character frame', () => {
     return expect(
