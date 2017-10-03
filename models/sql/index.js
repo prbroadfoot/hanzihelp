@@ -10,6 +10,7 @@ module.exports = {
   frames: {
     findByCharacter: sql('frames/findByCharacter.sql'),
     findByKeyword: sql('frames/findByKeyword.sql'),
-    findByLesson: sql('frames/findByLesson.sql')
+    findByLesson: sql('frames/findByLesson.sql'),
+    getElements: sql('frames/getElements.sql')
   }
 };

@@ -20,3 +20,10 @@ exports.findByLesson = ({ book, lesson }) => {
     lesson: lesson
   });
 };
+
+exports.getElements = ({ frame_number, frame_type }) => {
+  return db.any(sql.getElements, {
+    frame_number: frame_number,
+    frame_type: frame_type
+  });
+};

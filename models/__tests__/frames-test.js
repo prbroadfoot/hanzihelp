@@ -93,3 +93,30 @@ describe('findByLesson', () => {
     ]);
   });
 });
+
+describe('getElements', () => {
+  test('finds the elements for a character frame', () => {
+    return expect(
+      Frame.getElements({
+        frame_number: 103,
+        frame_type: 'character'
+      })
+    ).resolves.toEqual([
+      { cited_frame_reading: 'woman', cited_frame_type: 'character' },
+      { cited_frame_reading: 'child', cited_frame_type: 'character' }
+    ]);
+  });
+
+  test('finds the elements for a primitive frame', () => {
+    return expect(
+      Frame.getElements({
+        frame_number: 129,
+        frame_type: 'primitive'
+      })
+    ).resolves.toEqual([
+      { cited_frame_reading: 'soldier', cited_frame_type: 'character' },
+      { cited_frame_reading: 'flag', cited_frame_type: 'primitive' },
+      { cited_frame_reading: 'missile', cited_frame_type: 'character' }
+    ]);
+  });
+});
