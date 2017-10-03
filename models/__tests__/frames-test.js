@@ -1,9 +1,9 @@
-const Frame = require('../frames.js');
+const db = require('../db.js');
 
 describe('findByKeyword', () => {
   test('finds by keyword', () => {
     expect.assertions(1);
-    return expect(Frame.findByKeyword('good')).resolves.toEqual({
+    return expect(db.frames.findByKeyword('good')).resolves.toEqual({
       book: 1,
       character: '好',
       frame_type: 'character',
@@ -16,7 +16,7 @@ describe('findByKeyword', () => {
 
   test('finds by keyword case insensitively', () => {
     expect.assertions(1);
-    return expect(Frame.findByKeyword('gOoD')).resolves.toHaveProperty(
+    return expect(db.frames.findByKeyword('gOoD')).resolves.toHaveProperty(
       'character',
       '好'
     );
@@ -25,13 +25,13 @@ describe('findByKeyword', () => {
   test('finds by alternative reading', () => {
     expect.assertions(1);
     return expect(
-      Frame.findByKeyword('St. Bernard dog')
+      db.frames.findByKeyword('St. Bernard dog')
     ).resolves.toHaveProperty('character', '大');
   });
 
   test('prioritizes keyword over alternative reading for characters', () => {
     expect.assertions(1);
-    return expect(Frame.findByKeyword('muscle')).resolves.toHaveProperty(
+    return expect(db.frames.findByKeyword('muscle')).resolves.toHaveProperty(
       'character',
       '肌'
     );
@@ -40,13 +40,13 @@ describe('findByKeyword', () => {
   test('prioritizes alternative reading over keyword for primitives', () => {
     expect.assertions(1);
     return expect(
-      Frame.findByKeyword('muscle', 'primitive')
+      db.frames.findByKeyword('muscle', 'primitive')
     ).resolves.toHaveProperty('character', '力');
   });
 
   test('prioritizes character over primitive by default', () => {
     expect.assertions(1);
-    return expect(Frame.findByKeyword('house')).resolves.toHaveProperty(
+    return expect(db.frames.findByKeyword('house')).resolves.toHaveProperty(
       'character',
       '家'
     );
@@ -55,13 +55,13 @@ describe('findByKeyword', () => {
   test('prioritizes primitive over character when primitive explicitly requested', () => {
     expect.assertions(1);
     return expect(
-      Frame.findByKeyword('house', 'primitive')
+      db.frames.findByKeyword('house', 'primitive')
     ).resolves.toHaveProperty('character', '宀');
   });
 
   test('allows frame_type mismatch when matches do not exist', () => {
     expect.assertions(1);
-    return expect(Frame.findByKeyword('a drop of')).resolves.toHaveProperty(
+    return expect(db.frames.findByKeyword('a drop of')).resolves.toHaveProperty(
       'character',
       '丶'
     );
@@ -71,7 +71,7 @@ describe('findByKeyword', () => {
 describe('findByCharacter', () => {
   test('finds by character', () => {
     expect.assertions(1);
-    return expect(Frame.findByCharacter('好')).resolves.toHaveProperty(
+    return expect(db.frames.findByCharacter('好')).resolves.toHaveProperty(
       'keyword',
       'good'
     );
@@ -81,7 +81,9 @@ describe('findByCharacter', () => {
 describe('findByLesson', () => {
   test('finds by lesson', () => {
     expect.assertions(1);
-    return expect(Frame.findByLesson({ book: 1, lesson: 1 })).resolves.toEqual([
+    return expect(
+      db.frames.findByLesson({ book: 1, lesson: 1 })
+    ).resolves.toEqual([
       { character: '一', keyword: 'one' },
       { character: '二', keyword: 'two' },
       { character: '三', keyword: 'three' },
@@ -104,12 +106,18 @@ describe('findByLesson', () => {
 describe('getAlternativeReadings', () => {
   test('finds the alternative readings for a character frame', () => {
     return expect(
-      Frame.getAlternativeReadings({ frame_number: 1, frame_type: 'character' })
+      db.frames.getAlternativeReadings({
+        frame_number: 1,
+        frame_type: 'character'
+      })
     ).resolves.toEqual(['floor', 'ceiling']);
   });
   test('finds the alternative readings for a primitive frame', () => {
     return expect(
-      Frame.getAlternativeReadings({ frame_number: 1, frame_type: 'primitive' })
+      db.frames.getAlternativeReadings({
+        frame_number: 1,
+        frame_type: 'primitive'
+      })
     ).resolves.toEqual(['eyedropper']);
   });
 });
@@ -117,7 +125,7 @@ describe('getAlternativeReadings', () => {
 describe('getCharactersThatCiteFrame', () => {
   test('finds characters that cite a character frame', () => {
     return expect(
-      Frame.getCharactersThatCiteFrame({
+      db.frames.getCharactersThatCiteFrame({
         frame_number: 672,
         frame_type: 'character'
       })
@@ -128,7 +136,7 @@ describe('getCharactersThatCiteFrame', () => {
 describe('getElements', () => {
   test('finds the elements for a character frame', () => {
     return expect(
-      Frame.getElements({
+      db.frames.getElements({
         frame_number: 103,
         frame_type: 'character'
       })
@@ -140,7 +148,7 @@ describe('getElements', () => {
 
   test('finds the elements for a primitive frame', () => {
     return expect(
-      Frame.getElements({
+      db.frames.getElements({
         frame_number: 129,
         frame_type: 'primitive'
       })
@@ -154,7 +162,7 @@ describe('getElements', () => {
 
 describe('getHSKWordsUsingCharacter', () => {
   test('finds HSK words that contain the character', () => {
-    return expect(Frame.getHSKWordsUsingCharacter('厚')).resolves.toEqual([
+    return expect(db.frames.getHSKWordsUsingCharacter('厚')).resolves.toEqual([
       { hsk_level: 4, word: '厚' },
       { hsk_level: 6, word: '得天独厚' },
       { hsk_level: 6, word: '浓厚' },
