@@ -29,12 +29,19 @@ describe('findByKeyword', () => {
     ).resolves.toHaveProperty('character', '大');
   });
 
-  test('prioritizes keyword over alternative reading', () => {
+  test('prioritizes keyword over alternative reading for characters', () => {
     expect.assertions(1);
     return expect(Frame.findByKeyword('muscle')).resolves.toHaveProperty(
       'character',
       '肌'
     );
+  });
+
+  test('prioritizes alternative reading over keyword for primitives', () => {
+    expect.assertions(1);
+    return expect(
+      Frame.findByKeyword('muscle', 'primitive')
+    ).resolves.toHaveProperty('character', '力');
   });
 
   test('prioritizes character over primitive by default', () => {
