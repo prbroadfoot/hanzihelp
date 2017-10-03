@@ -3,15 +3,17 @@ const db = require('../db.js');
 describe('findByKeyword', () => {
   test('finds by keyword', () => {
     expect.assertions(1);
-    return expect(db.frames.findByKeyword('good')).resolves.toEqual({
-      book: 1,
-      character: '好',
-      frame_type: 'character',
-      keyword: 'good',
-      lesson: 6,
-      number: 103,
-      strokes: 6
-    });
+    return expect(db.frames.findByKeyword('good')).resolves.toEqual(
+      expect.objectContaining({
+        book: 1,
+        character: '好',
+        frame_type: 'character',
+        keyword: 'good',
+        lesson: 6,
+        number: 103,
+        strokes: 6
+      })
+    );
   });
 
   test('finds by keyword case insensitively', () => {
@@ -169,5 +171,46 @@ describe('getHSKWordsUsingCharacter', () => {
       { hsk_level: 6, word: '深情厚谊' },
       { hsk_level: 6, word: '雄厚' }
     ]);
+  });
+});
+
+test('complete query by keyword', () => {
+  return expect(db.frames.findByKeyword('correct')).resolves.toEqual({
+    alternativeReadings: [],
+    book: 1,
+    character: '正',
+    charactersThatCiteFrame: ['证', '政', '整', '怔', '征', '歪', '症', '钙'],
+    frameElements: [
+      { cited_frame_reading: 'one', cited_frame_type: 'character' },
+      { cited_frame_reading: 'footprint', cited_frame_type: 'character' }
+    ],
+    frame_type: 'character',
+    hskWordsUsingCharacter: [
+      { hsk_level: 2, word: '正在' },
+      { hsk_level: 4, word: '真正' },
+      { hsk_level: 4, word: '正常' },
+      { hsk_level: 4, word: '正好' },
+      { hsk_level: 4, word: '正确' },
+      { hsk_level: 4, word: '正式' },
+      { hsk_level: 5, word: '反正' },
+      { hsk_level: 5, word: '改正' },
+      { hsk_level: 5, word: '正' },
+      { hsk_level: 6, word: '端正' },
+      { hsk_level: 6, word: '更正' },
+      { hsk_level: 6, word: '公正' },
+      { hsk_level: 6, word: '纠正' },
+      { hsk_level: 6, word: '正月' },
+      { hsk_level: 6, word: '正当' },
+      { hsk_level: 6, word: '正负' },
+      { hsk_level: 6, word: '正规' },
+      { hsk_level: 6, word: '正经' },
+      { hsk_level: 6, word: '正气' },
+      { hsk_level: 6, word: '正义' },
+      { hsk_level: 6, word: '正宗' }
+    ],
+    keyword: 'correct',
+    lesson: 17,
+    number: 387,
+    strokes: 5
   });
 });
