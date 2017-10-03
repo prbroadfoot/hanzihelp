@@ -70,3 +70,26 @@ describe('findByCharacter', () => {
     );
   });
 });
+
+describe('findByLesson', () => {
+  test('finds by lesson', () => {
+    expect.assertions(1);
+    return expect(Frame.findByLesson({ book: 1, lesson: 1 })).resolves.toEqual([
+      { character: '一', keyword: 'one' },
+      { character: '二', keyword: 'two' },
+      { character: '三', keyword: 'three' },
+      { character: '四', keyword: 'four' },
+      { character: '五', keyword: 'five' },
+      { character: '六', keyword: 'six' },
+      { character: '七', keyword: 'seven' },
+      { character: '八', keyword: 'eight' },
+      { character: '九', keyword: 'nine' },
+      { character: '十', keyword: 'ten' },
+      { character: '口', keyword: 'mouth' },
+      { character: '日', keyword: 'day' },
+      { character: '月', keyword: 'month' },
+      { character: '田', keyword: 'rice field' },
+      { character: '目', keyword: 'eye' }
+    ]);
+  });
+});
