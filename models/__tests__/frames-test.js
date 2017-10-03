@@ -151,3 +151,15 @@ describe('getElements', () => {
     ]);
   });
 });
+
+describe('getHSKWordsUsingCharacter', () => {
+  test('finds HSK words that contain the character', () => {
+    return expect(Frame.getHSKWordsUsingCharacter('厚')).resolves.toEqual([
+      { hsk_level: 4, word: '厚' },
+      { hsk_level: 6, word: '得天独厚' },
+      { hsk_level: 6, word: '浓厚' },
+      { hsk_level: 6, word: '深情厚谊' },
+      { hsk_level: 6, word: '雄厚' }
+    ]);
+  });
+});

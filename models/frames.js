@@ -45,3 +45,7 @@ exports.getElements = ({ frame_number, frame_type }) => {
     frame_type: frame_type
   });
 };
+
+exports.getHSKWordsUsingCharacter = character => {
+  return db.any(sql.getHSKWordsUsingCharacter, character);
+};

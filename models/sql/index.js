@@ -13,6 +13,7 @@ module.exports = {
     findByLesson: sql('frames/findByLesson.sql'),
     getAlternativeReadings: sql('frames/getAlternativeReadings.sql'),
     getCharactersThatCiteFrame: sql('frames/getCharactersThatCiteFrame.sql'),
-    getElements: sql('frames/getElements.sql')
+    getElements: sql('frames/getElements.sql'),
+    getHSKWordsUsingCharacter: sql('frames/getHSKWordsUsingCharacter.sql')
   }
 };
