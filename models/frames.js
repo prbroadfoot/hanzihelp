@@ -68,10 +68,10 @@ class FramesRepository {
       frame_type: frame.frame_type
     };
     let results = await this.db.batch([
-      this.db.frames.getCharactersThatCiteFrame(frame_query_obj),
-      this.db.frames.getAlternativeReadings(frame_query_obj),
-      this.db.frames.getElements(frame_query_obj),
-      this.db.frames.getHSKWordsUsingCharacter(frame.character)
+      this.getCharactersThatCiteFrame(frame_query_obj),
+      this.getAlternativeReadings(frame_query_obj),
+      this.getElements(frame_query_obj),
+      this.getHSKWordsUsingCharacter(frame.character)
     ]);
 
     return Object.assign({}, frame, {
