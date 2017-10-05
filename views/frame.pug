@@ -2,7 +2,7 @@ extends base.pug
 
 block main
   div#frame-data
-    img#character-svg(src="/hanzi/20421.svg" width="200")
+    img#character-svg(src=`/hanzi_svgs/${character.charCodeAt(0)}.svg` width="200")
     h1= character
 
     div#main-frame-section(class='frame-section')
