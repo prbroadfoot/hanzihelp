@@ -1,0 +1,15 @@
+extends base.pug
+
+block main
+  div#frame-data
+    h2#frame-list-heading Book #{book}, Lesson #{lesson}
+    table#frame-list
+      thead
+        tr
+          th Hanzi
+          th Keyword
+      each frame in frameList
+        tr
+          td
+            a(href="/" + frame.character)= frame.character
+          td= frame.keyword

@@ -11,6 +11,18 @@ app.get('/', function(req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!' });
 });
 
+app.get('/frame_list', async function(req, res) {
+  let frameList = await db.frames.findByLesson({
+    book: req.query.book,
+    lesson: req.query.lesson
+  });
+  res.render('frame_list', {
+    frameList: frameList,
+    book: req.query.book,
+    lesson: req.query.lesson
+  });
+});
+
 app.get('/search', function(req, res) {
   res.redirect('/' + req.query.s);
 });
