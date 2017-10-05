@@ -107,6 +107,7 @@ describe('findByLesson', () => {
 
 describe('getAlternativeReadings', () => {
   test('finds the alternative readings for a character frame', () => {
+    expect.assertions(1);
     return expect(
       db.frames.getAlternativeReadings({
         frame_number: 1,
@@ -115,6 +116,7 @@ describe('getAlternativeReadings', () => {
     ).resolves.toEqual(['floor', 'ceiling']);
   });
   test('finds the alternative readings for a primitive frame', () => {
+    expect.assertions(1);
     return expect(
       db.frames.getAlternativeReadings({
         frame_number: 1,
@@ -126,6 +128,7 @@ describe('getAlternativeReadings', () => {
 
 describe('getCharactersThatCiteFrame', () => {
   test('finds characters that cite a character frame', () => {
+    expect.assertions(1);
     return expect(
       db.frames.getCharactersThatCiteFrame({
         frame_number: 672,
@@ -137,6 +140,7 @@ describe('getCharactersThatCiteFrame', () => {
 
 describe('getElements', () => {
   test('finds the elements for a character frame', () => {
+    expect.assertions(1);
     return expect(
       db.frames.getElements({
         frame_number: 103,
@@ -149,6 +153,7 @@ describe('getElements', () => {
   });
 
   test('finds the elements for a primitive frame', () => {
+    expect.assertions(1);
     return expect(
       db.frames.getElements({
         frame_number: 129,
@@ -164,6 +169,7 @@ describe('getElements', () => {
 
 describe('getHSKWordsUsingCharacter', () => {
   test('finds HSK words that contain the character', () => {
+    expect.assertions(1);
     return expect(db.frames.getHSKWordsUsingCharacter('厚')).resolves.toEqual([
       { hsk_level: 4, word: '厚' },
       { hsk_level: 6, word: '得天独厚' },
@@ -175,6 +181,7 @@ describe('getHSKWordsUsingCharacter', () => {
 });
 
 test('complete query by keyword', () => {
+  expect.assertions(1);
   return expect(db.frames.findByKeyword('correct')).resolves.toEqual({
     alternativeReadings: [],
     book: 1,
