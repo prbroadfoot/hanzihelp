@@ -1,0 +1,35 @@
+extends base.pug
+
+block main
+  div#frame-data
+    img#character-svg(src="/hanzi/20421.svg" width="200")
+    h1= character
+
+    div#main-frame-section(class='frame-section')
+      h2= keyword
+      p ID: #{number}
+      p
+        a(href='/frame_list?book=' + book + '&lesson=' + lesson) Book #{book}, Lesson #{lesson}
+
+    if alternativeReadings.length
+      div#alternative-readings(class='frame-section')
+        h3 Alternative Readings
+        ul
+          each reading in alternativeReadings
+            li= reading
+
+    if frameElements.length
+      div#frame-elements(class='frame-section')
+        h3 Elements
+        ul
+          each element in frameElements
+            li
+              a(href=`/${element.cited_frame_reading}?frame_type=${element.cited_frame_type}`)= element.cited_frame_reading
+
+    if charactersThatCiteFrame.length
+      div#used-in(class='frame-section')
+        h3 Used In
+        ul
+          each character in charactersThatCiteFrame
+            li
+              a(href="/" + character)= character

@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
-    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700")
     link(rel="stylesheet" href="css/font-awesome.min.css")
     link(rel="stylesheet", href="css/style.css")
     title Hanzi Help
@@ -11,7 +11,7 @@ html
       div#nav-links
         a(href="/") Home
         a(href="/about") About
-      form(class="searchbox" method="get" action="" role="search")
+      form(class="searchbox" method="get" action="/search" role="search")
         input(type="text" name="s" placeholder="Search...")
         button(type="submit" role="button")
           i(class="fa fa-search search-icon")
