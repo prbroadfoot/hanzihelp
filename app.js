@@ -34,7 +34,8 @@ app.get(/^\/(\%.+)/, async function(req, res) {
 });
 
 app.get(/\/(.+)/, async function(req, res) {
-  let frameData = await db.frames.findByKeyword(req.params[0]);
+  let frameType = req.query.frame_type || 'character';
+  let frameData = await db.frames.findByKeyword(req.params[0], frameType);
   res.render('frame', frameData);
 });
 
