@@ -78,9 +78,27 @@ class FramesRepository {
       charactersThatCiteFrame: results[0],
       alternativeReadings: results[1],
       frameElements: results[2],
-      hskWordsUsingCharacter: results[3]
+      hskWordsUsingCharacter: sortHSKWordsByLevel(results[3])
     });
   }
+}
+
+function sortHSKWordsByLevel(words) {
+  if (words.length == 0) {
+    return undefined;
+  }
+  let words_by_level = {
+    level1: [],
+    level2: [],
+    level3: [],
+    level4: [],
+    level5: [],
+    level6: []
+  };
+  for (word of words) {
+    words_by_level['level' + word['hsk_level']].push(word['word']);
+  }
+  return words_by_level;
 }
 
 module.exports = FramesRepository;

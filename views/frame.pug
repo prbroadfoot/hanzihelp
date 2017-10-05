@@ -33,3 +33,16 @@ block main
           each character in charactersThatCiteFrame
             li
               a(href="/" + character)= character
+
+    if hskWordsUsingCharacter
+      div#hsk-words(class='frame-section')
+        h3 HSK Words
+        each n in [1,2,3,4,5,6]
+          if hskWordsUsingCharacter['level' + n].length
+            dl
+              dt Level #{n}
+              dd
+                ul(class="hsk-word-list")
+                  each word in hskWordsUsingCharacter['level' + n]
+                    li
+                      a(href="http://dict.cn/" + word)= word
