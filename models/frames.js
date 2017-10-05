@@ -16,6 +16,10 @@ class FramesRepository {
     );
   }
 
+  findByHSKLevel(level) {
+    return this.db.many(sql.findByHSKLevel, level);
+  }
+
   findByKeyword(keyword, frame_type = 'character') {
     return this.db.task(t =>
       t
@@ -58,6 +62,7 @@ class FramesRepository {
       frame_type: frame_type
     });
   }
+
   getHSKWordsUsingCharacter(character) {
     return this.db.any(sql.getHSKWordsUsingCharacter, character);
   }

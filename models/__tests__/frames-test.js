@@ -219,3 +219,8 @@ test('complete query by keyword', () => {
     strokes: 5
   });
 });
+
+test('findByHSKLevel', () => {
+  expect.assertions(1);
+  return expect(db.frames.findByHSKLevel(1)).resolves.toHaveLength(178);
+});

@@ -12,15 +12,18 @@ app.get('/', function(req, res) {
 });
 
 app.get('/frame_list', async function(req, res) {
-  let frameList = await db.frames.findByLesson({
-    book: req.query.book,
-    lesson: req.query.lesson
-  });
-  res.render('frame_list', {
-    frameList: frameList,
-    book: req.query.book,
-    lesson: req.query.lesson
-  });
+  var frameList;
+  if (req.query.hsk_level) {
+    frameList = await db.frames.findByHSKLevel(req.query.hsk_level);
+    frameList.heading = `HSK Level ${req.query.hsk_level}`;
+  } else {
+    frameList = await db.frames.findByLesson({
+      book: req.query.book,
+      lesson: req.query.lesson
+    });
+    frameList.heading = `Book ${req.query.book}, Lesson ${req.query.lesson}`;
+  }
+  res.render('frame_list', { frameList: frameList });
 });
 
 app.get('/search', function(req, res) {
