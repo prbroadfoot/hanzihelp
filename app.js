@@ -12,7 +12,13 @@ app.get('/', function(req, res) {
 });
 
 app.get('/search', async function(req, res) {
-  let frameData = await db.frames.findByKeyword(req.query.s);
+  var frameData;
+  const searchQuery = req.query.s;
+  if (searchQuery.charCodeAt(0) > 255) {
+    frameData = await db.frames.findByCharacter(searchQuery);
+  } else {
+    frameData = await db.frames.findByKeyword(searchQuery);
+  }
   res.render('frame', frameData);
 });
 
