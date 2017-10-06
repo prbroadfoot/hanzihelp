@@ -58,6 +58,7 @@ nav a:hover {
 }
 
 .searchbox {
+  padding: 1px;
   margin: 0.7em;
   display: flex;
 }
@@ -228,4 +229,73 @@ tr:last-child td {
   text-align: center;
   font-size: 1.6rem;
   padding-bottom: 20px;
+}
+
+/* -----------------------------Index----------------------------------- */
+
+#index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  padding-top: 3em;
+  line-height:1.3em;
+}
+
+#index h2 {
+  text-align: center;
+}
+
+#index #intro > * {
+  margin-bottom: 1em;
+}
+
+#index .searchbox {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#index li {
+  display: inline;
+  font-size: 1.1em;
+  margin-right: 7px;
+}
+
+#lesson-form {
+  display: flex;
+}
+
+#lesson-form > * {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 1em;
+  background-color: white;
+  margin-right: 2px;
+}
+
+#lesson-form input {
+  width: 90px;
+  font-size: 1rem;
+  padding: 2px 1em;
+  text-align: center;
+}
+
+#lesson-form button:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.index-section {
+  text-align: center;
+  margin-bottom: 3em;
+}
+
+#main-input {
+  width: 100%;
+}
+
+@media only screen and (min-width: 680px) {
+  #index {
+    width: 680px;
+    margin: 0 auto;
+  }
 }

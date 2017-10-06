@@ -1,4 +1,27 @@
 extends base.pug
 
 block main
-  h1 Remembering the Hanzi
+  div#index
+    div#intro
+      h2 Remembering the Hanzi
+      p This is an unoffical companion site for the book series Remembering the Simplified Hanzi by James Heisig and Timothy Richardson.
+      p It contains cross-referenced information and stroke animations for each of the series' 3,018 Hanzi characters.
+    div#main-input(class="index-section")
+      form(class="searchbox" method="get" action="/search" role="search")
+        input(type="text" name="s" placeholder="Enter a Hanzi Character or Keyword...")
+        button(type="submit" role="button")
+          i(class="fa fa-search search-icon")
+    div(class="index-section")
+      h3 Find by lesson (1-55)
+      form#lesson-form(method="get" action="/frame_list")
+        input(type="text" name="lesson" placeholder="#")
+        select(name="book")
+          option(value="1") Book 1
+          option(value="2") Book 2
+        button(type="submit") Find Lesson
+    div(class="index-section")
+      h3 find by HSK level:
+      ul
+        each n in [1,2,3,4,5,6]
+          li
+            a(href="/frame_list?hsk_level=" + n) #{n}
