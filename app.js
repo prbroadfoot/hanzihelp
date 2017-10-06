@@ -11,6 +11,10 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+app.get('/about', function(req, res) {
+  res.render('about');
+});
+
 app.get('/frame_list', function(req, res) {
   req.query.hsk_level
     ? renderFrameListForHSKLevel(req, res)
