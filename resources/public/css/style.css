@@ -164,6 +164,7 @@ dt {
 
 @media only screen and (min-width: 680px) {
   #frame-data {
+    overflow: hidden;
     width: 680px;
     display: block;
     margin: 1em auto;

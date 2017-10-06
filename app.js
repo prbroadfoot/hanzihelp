@@ -32,14 +32,22 @@ app.get('/search', function(req, res) {
 
 // matches every route that starts with a Chinese character
 app.get(/^\/(\%.+)/, async function(req, res) {
-  let frameData = await db.frames.findByCharacter(req.params[0]);
-  res.render('frame', frameData);
+  try {
+    let frameData = await db.frames.findByCharacter(req.params[0]);
+    res.render('frame', frameData);
+  } catch (e) {
+    res.render('frame_not_found', { character: req.params[0] });
+  }
 });
 
 app.get(/\/(.+)/, async function(req, res) {
   let frameType = req.query.frame_type || 'character';
-  let frameData = await db.frames.findByKeyword(req.params[0], frameType);
-  res.render('frame', frameData);
+  try {
+    let frameData = await db.frames.findByKeyword(req.params[0], frameType);
+    res.render('frame', frameData);
+  } catch (e) {
+    res.render('frame_not_found', { keyword: req.params[0] });
+  }
 });
 
 app.listen(3001, function() {

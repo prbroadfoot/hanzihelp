@@ -1,0 +1,10 @@
+extends base.pug
+
+block main
+  div#frame-data
+    if character
+      img#character-svg(src=`/hanzi_svgs/${character.charCodeAt(0)}.svg` width="200")
+      h1= character
+      p There is no frame data for this character.
+    else
+      p There are no frames matching the keyword "#{keyword}".
