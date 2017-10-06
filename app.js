@@ -8,7 +8,7 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 
 app.get('/', function(req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!' });
+  res.render('index');
 });
 
 app.get('/frame_list', function(req, res) {
