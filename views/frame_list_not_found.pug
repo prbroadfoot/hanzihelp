@@ -1,0 +1,8 @@
+extends base.pug
+
+block main
+  div#frame-data
+    if hsk_level
+      p HSK level is invalid (should be 1-6).
+    else
+      p Lesson number is invalid.

@@ -32,7 +32,7 @@ class FramesRepository {
   }
 
   findByLesson({ book, lesson }) {
-    return this.db.any(sql.findByLesson, {
+    return this.db.many(sql.findByLesson, {
       book: book,
       lesson: lesson
     });

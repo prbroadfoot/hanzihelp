@@ -11,19 +11,10 @@ app.get('/', function(req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!' });
 });
 
-app.get('/frame_list', async function(req, res) {
-  var frameList;
-  if (req.query.hsk_level) {
-    frameList = await db.frames.findByHSKLevel(req.query.hsk_level);
-    frameList.heading = `HSK Level ${req.query.hsk_level}`;
-  } else {
-    frameList = await db.frames.findByLesson({
-      book: req.query.book,
-      lesson: req.query.lesson
-    });
-    frameList.heading = `Book ${req.query.book}, Lesson ${req.query.lesson}`;
-  }
-  res.render('frame_list', { frameList: frameList });
+app.get('/frame_list', function(req, res) {
+  req.query.hsk_level
+    ? renderFrameListForHSKLevel(req, res)
+    : renderFrameListForLesson(req, res);
 });
 
 app.get('/search', function(req, res) {
@@ -49,6 +40,32 @@ app.get(/\/(.+)/, async function(req, res) {
     res.render('frame_not_found', { keyword: req.params[0] });
   }
 });
+
+async function renderFrameListForHSKLevel(req, res) {
+  const hsk_level = req.query.hsk_level;
+  try {
+    let frameList = await db.frames.findByHSKLevel(hsk_level);
+    frameList.heading = `HSK Level ${hsk_level}`;
+    res.render('frame_list', { frameList: frameList });
+  } catch (e) {
+    res.render('frame_list_not_found', { hsk_level: hsk_level });
+  }
+}
+
+async function renderFrameListForLesson(req, res) {
+  const lesson = req.query.lesson;
+  const book = req.query.book;
+  try {
+    frameList = await db.frames.findByLesson({
+      book: book,
+      lesson: lesson
+    });
+    frameList.heading = `Book ${book}, Lesson ${lesson}`;
+    res.render('frame_list', { frameList: frameList });
+  } catch (e) {
+    res.render('frame_list_not_found');
+  }
+}
 
 app.listen(3001, function() {
   console.log('app listening on port 3001!');
